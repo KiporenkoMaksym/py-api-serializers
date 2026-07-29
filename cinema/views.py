@@ -56,6 +56,7 @@ class MovieViewSet(viewsets.ModelViewSet):
             return MovieListSerializer
         return MovieSerializer
 
+
 class MovieSessionViewSet(viewsets.ModelViewSet):
     queryset = MovieSession.objects.select_related(
         "movie",

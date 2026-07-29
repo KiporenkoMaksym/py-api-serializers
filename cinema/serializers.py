@@ -79,6 +79,7 @@ class MovieListSerializer(serializers.ModelSerializer):
             "actors"
         )
 
+
 class MovieSessionSerializer(serializers.ModelSerializer):
     movie = MovieSerializer(many=False, read_only=True)
     cinema_hall = CinemaHallSerializer(many=False, read_only=True)
