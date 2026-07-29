@@ -15,7 +15,7 @@ app_name = "cinema"
 
 router = routers.DefaultRouter()
 router.register(
-    "cinema-halls",
+    "cinema_halls",
     CinemaHallViewSet
 )
 router.register(
@@ -31,7 +31,7 @@ router.register(
     MovieViewSet
 )
 router.register(
-    "movie-sessions",
+    "movie_sessions",
     MovieSessionViewSet
 )
 router.register(
