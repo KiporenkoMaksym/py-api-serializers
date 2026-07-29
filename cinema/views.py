@@ -9,14 +9,17 @@ from cinema.models import (
     Order,
     Ticket
 )
-from cinema.serializers import(
+from cinema.serializers import (
     CinemaHallSerializer,
     GenreSerializer,
     ActorSerializer,
     MovieSerializer,
     MovieSessionSerializer,
     OrderSerializer,
-    TicketSerializer
+    TicketSerializer,
+    MovieListSerializer,
+    MovieSessionListSerializer,
+    MovieSessionDetailSerializer
 )
 
 
@@ -36,13 +39,45 @@ class ActorViewSet(viewsets.ModelViewSet):
 
 
 class MovieViewSet(viewsets.ModelViewSet):
-    queryset = Movie.objects.all()
+    queryset = Movie.objects.prefetch_related("genres", "actors")
     serializer_class = MovieSerializer
 
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.action == "list":
+            queryset = queryset.prefetch_related(
+                "genres",
+                "actors"
+            )
+        return queryset
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return MovieListSerializer
+        return MovieSerializer
 
 class MovieSessionViewSet(viewsets.ModelViewSet):
-    queryset = MovieSession.objects.all()
+    queryset = MovieSession.objects.select_related(
+        "movie",
+        "cinema_hall"
+    )
     serializer_class = MovieSessionSerializer
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if self.action == "list":
+            queryset = queryset.select_related(
+                "movie",
+                "cinema_hall"
+            )
+        return queryset
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return MovieSessionListSerializer
+        if self.action == "retrieve":
+            return MovieSessionDetailSerializer
+        return MovieSessionSerializer
 
 
 class OrderViewSet(viewsets.ModelViewSet):
