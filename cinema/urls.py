@@ -36,11 +36,13 @@ router.register(
 )
 router.register(
     "orders",
-    OrderViewSet
+    OrderViewSet,
+    basename="order"
 )
 router.register(
     "tickets",
-    TicketViewSet
+    TicketViewSet,
+    basename= "ticket"
 )
 
 urlpatterns = [
