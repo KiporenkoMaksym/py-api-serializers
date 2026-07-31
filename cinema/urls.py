@@ -42,7 +42,7 @@ router.register(
 router.register(
     "tickets",
     TicketViewSet,
-    basename= "ticket"
+    basename="ticket"
 )
 
 urlpatterns = [
