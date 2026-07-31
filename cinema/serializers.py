@@ -165,6 +165,7 @@ class OrderSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(
         source="user.username"
     )
+
     class Meta:
         model = Order
         fields = ("id", "created_at")
@@ -172,6 +173,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class TicketSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Ticket
         fields = (
