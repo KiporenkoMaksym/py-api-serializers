@@ -162,9 +162,13 @@ class MovieSessionDetailSerializer(
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(
+        source="user.username"
+    )
     class Meta:
         model = Order
-        fields = ("id", "created_at", "user")
+        fields = ("id", "created_at")
+        read_only_fields = ("user")
 
 
 class TicketSerializer(serializers.ModelSerializer):
