@@ -85,7 +85,6 @@ class MovieSessionViewSet(viewsets.ModelViewSet):
 
 
 class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all()
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
@@ -93,7 +92,6 @@ class OrderViewSet(viewsets.ModelViewSet):
 
 
 class TicketViewSet(viewsets.ModelViewSet):
-    queryset = Ticket.objects.all()
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
